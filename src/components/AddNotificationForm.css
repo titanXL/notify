@@ -1,0 +1,11 @@
+li>a:hover{
+    cursor: pointer;
+}
+#button{
+    background-color: #5bc0de;
+    color: #fff;
+    width: 100%;
+}
+.well{
+    border-radius: 0;
+}
