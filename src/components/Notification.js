@@ -18,12 +18,12 @@ class Notification extends Component {
             this.setState({
                 expires
             })
-
         }
     }
     componentDidMount() {
         const expires = this.state.expires
         const id = this.props.info.id
+        console.log(id)
         if (expires !== 0 && expires !== '.') {
             this.startExpiration(expires, id)
         }
