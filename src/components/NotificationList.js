@@ -4,8 +4,13 @@ import './NotificationList.css'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 export default class NotificationList extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            list: []
+        }
+    }
     render() {
-        let list = this.props.notifications.notifications
         return (
             <div className='row myrow'>
                 <ReactCSSTransitionGroup
@@ -14,12 +19,27 @@ export default class NotificationList extends Component {
                     transitionAppearTimeout={500}
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={300}>
-                    {list.filter(notification => notification.type !== 'bonus').map((notification, i) => (
+                    {this.state.list.filter(notification => notification.type !== 'bonus').map((notification, i) => (
                         <Notification info={notification} key={i} delete={this.props.deleteNotification} edit={this.props.editNotification} />
                     ))}
                 </ReactCSSTransitionGroup>
-
             </div>
         )
     }
+
+    componentWillMount() {
+        this.props.fetchNotifications()
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        console.log()
+        let newNotifications = nextProps.notifications.notifications
+        console.log(nextState)
+        if (this.state.list.length !== newNotifications.length) {
+            this.setState({
+                list: newNotifications
+            })
+        }
+    }
+
 }

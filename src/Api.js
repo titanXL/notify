@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { fetchNotifications, addNotification,deleteNotification } from './actions/actionCreators'
 export function fetchNotificationsFromAPI() {
     return axios.get('/api/notifications', {})
 }

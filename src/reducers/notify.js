@@ -1,13 +1,15 @@
-import notificationsData from '../data'
 function notifications(state = [], action) {
     switch (action.type) {
         case 'FETCH_NOTIFICATIONS_SUCCESS':
             let newState = action.notifications.data
             console.log(newState)
-            return newState.concat(state)
+            console.log(state)
+            return newState
 
         case 'FETCH_NOTIFICATIONS_FAILED':
             return state
+            case 'FETCH_NOTIFICATIONS_INITIAL':
+            
         case 'DELETE_NOTIFICATION_SUCCESS':
             let notificationId = JSON.parse(action['deletedId']['config']['data'])
             let toDelete = notificationId['id']

@@ -50,6 +50,7 @@ app.post('/api/editnotification', (req, res) => {
 var server = app.listen(app.get('port'), () => {
     console.log(`Server running at http://localhost:${app.get('port')}/`)
 })
+
 io = require('socket.io').listen(server)
 let notifications = []
 io.sockets.on('connection', (socket) => {

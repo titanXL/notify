@@ -21,7 +21,7 @@ export default class Notify extends Component {
         )
     }
     
-    componentWillMount () {
+  componentWillMount() {
         this.props.fetchNotifications()
     }
     

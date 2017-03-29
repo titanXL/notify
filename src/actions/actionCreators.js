@@ -48,3 +48,9 @@ export function fetchNotifications(notifications){
     }
 }
 
+export function fetchNotificationsInitial(){
+    return{
+        type:'FETCH_NOTIFICATIONS_INITIAL'
+
+    }
+}
