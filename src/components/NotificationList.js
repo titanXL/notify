@@ -32,7 +32,7 @@ export default class NotificationList extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log()
+        console.log('test')
         let newNotifications = nextProps.notifications.notifications
         console.log(nextState)
         if (this.state.list.length !== newNotifications.length) {
@@ -41,5 +41,4 @@ export default class NotificationList extends Component {
             })
         }
     }
-
 }
