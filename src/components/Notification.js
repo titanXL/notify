@@ -26,7 +26,6 @@ class Notification extends Component {
         if (expires !== 0 && expires !== '.') {
             this.props.handleSocket(id, expires)
 
-            this.startExpiration(expires, id)
         }
     }
     startExpiration(expires, id) {
