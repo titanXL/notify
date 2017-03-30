@@ -22,7 +22,6 @@ function* AddNotificationSaga(action) {
 }
 
 function* DeleteNotificationSaga(action) {
-    console.log('expired')
     try {
         let id = action.id
         let deletedId = yield call(Api.DeleteNotificationAPI, id)
