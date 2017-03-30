@@ -13,7 +13,6 @@ export function editNotification(notification) {
 }
 
 export function deleteNotification(id) {
-    console.log('tuk')
     return {
         type: 'DELETE_NOTIFICATION',
         id

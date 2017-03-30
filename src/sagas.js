@@ -1,5 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
+import { eventChannel } from 'redux-saga'
 import * as Api from './Api'
+
 function* fetchNotificationsSaga(action) {
     try {
         const notifications = yield call(Api.fetchNotificationsFromAPI)
@@ -11,7 +13,6 @@ function* fetchNotificationsSaga(action) {
 
 function* AddNotificationSaga(action) {
     try {
-        console.log('add1')
         let newNotification = action.notification
         yield call(Api.AddNotificationAPI, action.notification)
         yield put({ type: 'ADD_NOTIFICATION_SUCCESS', newNotification })
@@ -21,8 +22,6 @@ function* AddNotificationSaga(action) {
 }
 
 function* DeleteNotificationSaga(action) {
-    console.log('tuk1')
-    console.log(action)
     try {
         let id = action.id
         let deletedId = yield call(Api.DeleteNotificationAPI, id)

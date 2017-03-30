@@ -54,13 +54,14 @@ var server = app.listen(app.get('port'), () => {
 io = require('socket.io').listen(server)
 let notifications = []
 io.sockets.on('connection', (socket) => {
+    console.log('connected')
     socket.once('disconnect', () => {
         socket.disconnect()
     })
-    socket.on('startExpiration', (notification) => {
+    socket.on('server/startExpiration', (info) => {
         console.log('started')
-        console.log(notification)
-        let expires = Number(notification.expires)
-        setTimeout(()=> io.emit('expired', notification),expires*1000)
+        let id = info.id
+        let expires = Number(info.expires)
+        setTimeout(()=> io.emit('expired', id),expires*1000)
     })
 })

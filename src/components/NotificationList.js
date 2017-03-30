@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import Notification from './Notification'
 import './NotificationList.css'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-
+import io from 'socket.io-client'
 export default class NotificationList extends Component {
     constructor(props) {
         super(props)
         this.state = {
             list: []
         }
+        this.handleSocket = this.handleSocket.bind(this)
     }
     render() {
         return (
@@ -20,21 +21,30 @@ export default class NotificationList extends Component {
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={300}>
                     {this.state.list.filter(notification => notification.type !== 'bonus').map((notification, i) => (
-                        <Notification info={notification} key={i} delete={this.props.deleteNotification} edit={this.props.editNotification} />
+                        <Notification info={notification} key={i} delete={this.props.deleteNotification} edit={this.props.editNotification} handleSocket={this.handleSocket}/>
                     ))}
                 </ReactCSSTransitionGroup>
             </div>
         )
     }
 
+    handleSocket(id, expires){
+        let info = {id, expires}
+        this.socket.emit('server/startExpiration',info)
+    }
+    componentDidMount () {
+        this.socket = io('http://localhost:3001')
+        this.socket.on('expired',(id)=>{
+            this.props.deleteNotification(id)
+        })
+    }
+    
     componentWillMount() {
         this.props.fetchNotifications()
     }
 
     componentWillUpdate(nextProps, nextState) {
-        console.log('test')
         let newNotifications = nextProps.notifications.notifications
-        console.log(nextState)
         if (this.state.list.length !== newNotifications.length) {
             this.setState({
                 list: newNotifications

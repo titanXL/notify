@@ -2,8 +2,7 @@ function notifications(state = [], action) {
     switch (action.type) {
         case 'FETCH_NOTIFICATIONS_SUCCESS':
             let newState = action.notifications.data
-            console.log(newState)
-            console.log(state)
+           
             return newState
 
         case 'FETCH_NOTIFICATIONS_FAILED':
