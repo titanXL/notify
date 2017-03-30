@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Notification from './Notification'
 import './NotificationList.css'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import io from 'socket.io-client'
 export default class NotificationList extends Component {
     constructor(props) {
         super(props)
@@ -30,11 +29,10 @@ export default class NotificationList extends Component {
 
     handleSocket(id, expires){
         let info = {id, expires}
-        this.socket.emit('server/startExpiration',info)
+        this.props.socket.emit('server/startExpiration',info)
     }
     componentDidMount () {
-        this.socket = io('http://localhost:3001')
-        this.socket.on('expired',(id)=>{
+        this.props.socket.on('expired',(id)=>{
             this.props.deleteNotification(id)
         })
     }
